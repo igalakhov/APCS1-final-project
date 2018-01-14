@@ -25,6 +25,11 @@ public class CommandHandler {
         //load the hashmap
         commandMap = new HashMap<>();
         commandMap.put("exit", new Exit());
+        commandMap.put("loadtweets", new LoadTweets());
+        commandMap.put("help", new Help());
+
+        //attach the finalized hashap to the help command (we need to typecast)
+        ((Help) commandMap.get("help")).attachHashMap(commandMap);
 
     }
     /*
@@ -47,13 +52,12 @@ public class CommandHandler {
                 //run the command (tertiary expressions FTW!!!)
                 int result = commandArgs.length == 0 ? cur.handleArgs() : cur.handleArgs(commandArgs);
 
-                //maybe do something with the result here?
-
+                //TODO: maybe do something with the result here?
 
             } else {
                 //let the user know they did something wrong
-                System.out.println(commandName + " is not recognised as a command");
-                System.out.println("type \"help\" for help");
+                System.out.println("\"" + commandName + "\" is not recognised as a command");
+                System.out.println("Type \"help\" for help");
             }
         }
     }
