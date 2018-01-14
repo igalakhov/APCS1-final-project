@@ -73,16 +73,42 @@ public class LoadTweets implements  ShellCommand{
     public int handleArgs(){
         System.out.println("This command cannot be used with no arguments");
         System.out.println("Type \"help loadtweets\" for more info");
-        return 0;
+        return 1; //something went wrong
     }
     public int handleArgs(String[] args){
+        //make sure there is a good number of parameters
+        if(args.length > 2){
+            System.out.println("This command canot be used with more than 2 arguments");
+            return 0; //something went wrong
+        }
+        //figure out the parameters
+        String search = args[0];
+
+        int numTweets = 100;
+        if(args.length == 2) {
+            try {
+                numTweets = Integer.parseInt(args[1]);
+            } catch (NumberFormatException e) {
+                System.out.println("\"" + args[1] + "\" cannot be parsed as an integer");
+                return 0; // something went wrong
+            }
+        }
+
+        //feedback
+        System.out.println("Attempting to load " + numTweets + " Tweets using search \"" + search + "\"...");
+
+
+
+
         return 1;
     }
     public String getCommandPattern(){
-        return null;
+        return "loadtweets search [numtweets]";
     }
     public String getInfo(){
-        return null;
+        return "Loads a certain number of tweets with a certain search. \n" +
+                "The maximum number of tweets is 500, the minimum is 1. \n" +
+                "If no number of tweets is specified, 100 tweets are loaded. \n";
     }
 
 }
