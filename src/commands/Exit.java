@@ -1,8 +1,6 @@
 package commands;
-
-
 /*
-
+    Exits the shell
  */
 public class Exit implements ShellCommand {
 
