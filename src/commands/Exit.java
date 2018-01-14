@@ -5,8 +5,8 @@ package commands;
 public class Exit implements ShellCommand {
 
     public int handleArgs(String[] args){
-        System.out.println("This command does not take in any arguments");
-        System.out.println("Type in \"help exit\" for more info");
+        System.out.println("This command cannot be used with arguments");
+        System.out.println("Type \"help exit\" for more info");
         return 0; //because something went wrong
     }
     public int handleArgs(){
