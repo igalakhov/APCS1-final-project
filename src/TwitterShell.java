@@ -7,6 +7,24 @@ public class TwitterShell {
 	    //I like it how this editor spell checks my last name
 	    System.out.println("Created By Ivan Galakhov, Jan. 2018");
 
+	    //attempt to connect to Twitter API
+        System.out.print("Connecting to Twitter API");
+        for(int i = 0; i < 2; i++){
+            System.out.print(".");
+            try {
+                Thread.sleep(250);
+            } catch(Exception e) {
+
+            }
+        }
+        System.out.println(".");
+        //check if something went wrong
+        if(CommandHandler.establishTwitterConnection() == 0){
+            System.out.println("Something went wrong");
+            System.exit(1);
+        }
+        System.out.println("Connection Established!");
+
 	    //run the shell
         CommandHandler mainHandler = new CommandHandler(new Scanner(System.in));
 

@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class CommandHandler {
     private Scanner input;
     private HashMap<String, ShellCommand> commandMap; // the map of all commands and their objects
+
+
+    public static int establishTwitterConnection(){
+        return LoadTweets.connectToAPI();
+    }
     /*
        Creates a new handler to interpret user input
        @param input - a Scanner from which the handler
