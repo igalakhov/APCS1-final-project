@@ -1,9 +1,12 @@
 package commands;
 
-import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
+import twitter4j.*;
 import twitter4j.auth.OAuth2Token;
 import twitter4j.conf.ConfigurationBuilder;
+import twitterwrapper.Tweet;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /*
     Loads Tweets
@@ -97,6 +100,52 @@ public class LoadTweets implements  ShellCommand{
         //feedback
         System.out.println("Attempting to load " + numTweets + " Tweets using search \"" + search + "\"...");
 
+        /*
+            Begin loading tweets
+            Since the Twitter API allows a maximum of 100 tweets per request
+            We need to operate in multiple batches
+         */
+
+        //polymorphism !!!
+        //Array list with search results
+        List<Status> searchResults = new ArrayList<Status>();
+
+        long maxId = -1;
+
+        searchLoop:
+        while(searchResults.size() < numTweets) {
+
+            //setup query
+            Query q = new Query(search + "+exclude:retweets");
+            q.setCount(numTweets);
+            q.resultType(Query.RECENT);
+            q.setLang("en");
+            q.setMaxId(maxId);
+
+            try {
+                QueryResult  tempResults = conn.search(q);
+                //if we found no tweets, we're done
+                if(tempResults.getCount() == 0){
+                    break searchLoop;
+                }
+                for (Status curStatus : tempResults.getTweets()) {
+                    if(maxId == -1 || curStatus.getId() < maxId){
+                        maxId = curStatus.getId();
+                    }
+                    searchResults.add(curStatus);
+                    //if we found all our tweets, we're done
+                    if(searchResults.size() >= numTweets){
+                        break searchLoop;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Something went wrong...");
+                return 0; //something went wrong
+            }
+        }
+        for(Status s : searchResults){
+            System.out.println(Tweet.cleanText(s.getText()));
+        }
 
 
 
