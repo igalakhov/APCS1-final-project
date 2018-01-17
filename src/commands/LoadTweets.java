@@ -144,7 +144,7 @@ public class LoadTweets implements  ShellCommand{
             }
         }
         for(Status s : searchResults){
-            System.out.println(Tweet.cleanText(s.getText()));
+            Tweet thing = new Tweet(s.getText());
         }
 
 
