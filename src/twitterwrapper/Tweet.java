@@ -21,11 +21,14 @@ public class Tweet {
         automatically clean it to remove unwanted material
      */
     public Tweet(String body){
+        //parsing that we need for everything
+        body = body.replaceAll("\n", " ");
+        body = body.replaceAll("\\s{2,}", " ");
         this.body = cleanText(body);
 
         //parse out the hashtags and mentions
-        myHashtags = new ArrayList<String>();
-        myMentions = new ArrayList<String>();
+        myHashtags = new ArrayList<>();
+        myMentions = new ArrayList<>();
 
         for(String curPart : body.split(" ")){
             if(curPart.length() == 0) continue;
