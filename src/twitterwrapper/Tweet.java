@@ -22,8 +22,10 @@ public class Tweet {
      */
     public Tweet(String body){
         //parsing that we need for everything
-        body = body.replaceAll("\n", " ");
-        body = body.replaceAll("\\s{2,}", " ");
+        body = body.replaceAll("\n", " "); //new lines
+        body = body.replaceAll("\\s{2,}", " "); //large amount of spaces
+        body = body.trim(); //left and right spaces
+
         this.body = cleanText(body);
 
         //parse out the hashtags and mentions
