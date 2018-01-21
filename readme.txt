@@ -4,15 +4,30 @@ Final Project for APCS1
 
 Code finished as of 3:00 AM 1/21/2018
 
+Big thanks to [Mansour](https://github.com/Razorflame3912) for testing this on Linux
+
 ## Setup instructions:
+
+### Windows
 To compile, set your current directory to the src folder of this project and run:
 ```
-javac -cp twitter4j.jar;watson.jar; TwitterShell.java
+javac -cp Twitter4j.jar;watson.jar; TwitterShell.java
 ```
 To run, run: (not including the classpath arguments might cause a classnotfoundexception)
 ```
-java -cp twitter4j.jar;watson.jar; TwitterShell
+java -cp Twitter4j.jar;watson.jar; TwitterShell
 ```
+
+### Linux
+To compile, set your current directory to the src folder of this project and run:
+```
+javac -cp .:Twitter4j.jar:watson.jar: TwitterShell.java
+```
+To run, run: (not including the classpath arguments might cause a classnotfoundexception)
+```
+java -cp .:Twitter4j.jar:watson.jar: TwitterShell
+```
+
 
 ## Description
   This is a project that allows the user to analyze how twitter feels about certain topcs. It is an imporoved version of a [project](https://github.com/igalakhov/Hack-River-Dell-II) I made for a 24 hour hackathon around november. 
