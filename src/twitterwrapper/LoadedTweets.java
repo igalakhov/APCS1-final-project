@@ -1,6 +1,7 @@
 package twitterwrapper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /*
@@ -19,6 +20,103 @@ public class LoadedTweets {
     private int numResults; //number of results
     private boolean isLoaded; //check if any tweets are loaded
 
+    /*
+        Prints out all hashtags
+     */
+    public void showHashtags(){
+        List<String> uniqueHashtags = new ArrayList<>();
+        for(Tweet t : curLoaded){
+            for(String tag : t.getHashtags()){
+                if(!uniqueHashtags.contains(tag)){
+                    uniqueHashtags.add(tag);
+                }
+            }
+        }
+        Collections.sort(uniqueHashtags);
+        int cur = 1;
+        for(String hashtag : uniqueHashtags){
+            System.out.print(hashtag + " ");
+            if((cur % 5) == 0){
+                System.out.println("");
+            }
+            cur++;
+        }
+        System.out.println("");
+    }
+    /*
+        Prints out all mentions
+     */
+    public void showMentions(){
+        List<String> uniqueMentions = new ArrayList<>();
+        for(Tweet t : curLoaded){
+            for(String mention : t.getMentions()){
+                if(!uniqueMentions.contains(mention)){
+                    uniqueMentions.add(mention);
+                }
+            }
+        }
+        Collections.sort(uniqueMentions);
+        int cur = 1;
+        for(String mention : uniqueMentions){
+            System.out.print(mention + " ");
+            if((cur % 5) == 0){
+                System.out.println("");
+            }
+            cur++;
+        }
+        System.out.println("");
+    }
+    /*
+        Prints out benchmarks
+     */
+    public void showBenchmarks(){
+        List<Tweet> copy = new ArrayList<>(curLoaded);
+        Collections.sort(copy);
+
+        Tweet lo = copy.get(0);
+
+        System.out.println("Lowest Sentiment ("+ lo.getSentiment() + "):");
+        System.out.println(lo.getRawBody());
+        System.out.println("");
+
+        Tweet mid = copy.get((copy.size() / 2));
+        System.out.println("Median Sentiment ("+ mid.getSentiment() + "):");
+        System.out.println(mid.getRawBody());
+        System.out.println("");
+
+        Tweet hi = copy.get(copy.size() - 1);
+        System.out.println("Highest Sentiment ("+ hi.getSentiment() + "):");
+        System.out.println(hi.getRawBody());
+        System.out.println("");
+    }
+    /*
+        Prints out averages for all values for tweets
+     */
+    public void showAverages(){
+        double avgSentiment = 0;
+        double avgJoy = 0;
+        double avgSadness = 0;
+        double avgFear = 0;
+        double avgDigust = 0;
+        double avgAnger = 0;
+
+        for(Tweet t : curLoaded){
+            avgSentiment += t.getSentiment();
+            avgJoy += t.getJoy();
+            avgSadness += t.getSadness();
+            avgFear += t.getFear();
+            avgDigust += t.getDisgust();
+            avgAnger += t.getAnger();
+        }
+
+        System.out.println("Average Sentiment: " + avgSentiment / curLoaded.size());
+        System.out.println("");
+        System.out.println("Average Joy: " + avgJoy / curLoaded.size());
+        System.out.println("Average Sadness: " + avgSadness / curLoaded.size());
+        System.out.println("Average Fear: " + avgFear / curLoaded.size());
+        System.out.println("Average Disgust: " + avgDigust / curLoaded.size());
+        System.out.println("Average Anger: " + avgAnger / curLoaded.size());
+    }
     /*
         Private constructor because this is a singleton
      */

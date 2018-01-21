@@ -28,8 +28,9 @@ public class CommandHandler {
         commandMap.put("loadtweets", new LoadTweets());
         commandMap.put("help", new Help());
         commandMap.put("analyzetweets", new AnalyzeTweets());
+        commandMap.put("showinfo", new ShowInfo());
 
-        //attach the finalized hashap to the help command (we need to typecast)
+        //attach the finalized hashmap to the help command (we need to typecast)
         ((Help) commandMap.get("help")).attachHashMap(commandMap);
 
     }

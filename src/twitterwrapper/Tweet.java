@@ -10,8 +10,9 @@ import java.util.ArrayList;
     This class is a bit more simplified from the purposes
 
  */
-public class Tweet {
+public class Tweet implements Comparable<Tweet>{
     private String body; //the text of the tweet
+    private String rawBody; //the raw text of the tweet (no url)
     private double mySentiment; //sentiment value of the tweet (from watson)
     //emotions (enum would be better here, to be honest)
     private double mySadness;
@@ -36,6 +37,14 @@ public class Tweet {
        new SentimentOptions.Builder().build()
     ).build();
     /*
+        Compares tweet to other tweet (based on sentiment)
+     */
+    public int compareTo(Tweet other){
+        if(mySentiment > other.getSentiment()) return 1;
+        if(mySentiment == other.getSentiment()) return 0;
+        return -1;
+    }
+    /*
         These functions return values of the tweet
         @return requested value
      */
@@ -44,6 +53,11 @@ public class Tweet {
     public double getFear(){return myFear;};
     public double getDisgust(){return myDisgust;};
     public double getAnger(){return myAnger;};
+    public double getSadness(){return mySadness;};
+    public String getBody(){return body;};
+    public String getRawBody(){return rawBody;};
+    public List<String> getHashtags(){return myHashtags;};
+    public List<String> getMentions(){return myMentions;};
     /*
        Analyzes the tweet
     */
@@ -57,6 +71,7 @@ public class Tweet {
         myFear = emotions.getFear();
         myDisgust = emotions.getDisgust();
         myAnger = emotions.getFear();
+        mySadness = emotions.getSadness();
 
         mySentiment = results.getSentiment().getDocument().getScore();
     }
@@ -84,7 +99,7 @@ public class Tweet {
         body = body.replaceAll("\n", " "); //new lines
         body = body.replaceAll("\\s{2,}", " "); //large amount of spaces
         body = body.trim(); //left and right spaces
-
+        this.rawBody = body;
         this.body = cleanText(body);
 
         //parse out the hashtags and mentions
@@ -95,10 +110,10 @@ public class Tweet {
             if(curPart.length() == 0) continue;
             String first = curPart.trim().substring(0, 1);
             if(first.equals("#")){
-                myHashtags.add(curPart.trim());
+                myHashtags.add(curPart.trim().toLowerCase());
             }
             if(first.equals("@")){
-                myMentions.add(curPart.trim());
+                myMentions.add(curPart.trim().toLowerCase());
             }
         }
     }
