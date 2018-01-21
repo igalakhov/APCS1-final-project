@@ -1,5 +1,11 @@
 package twitterwrapper;
 
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.NaturalLanguageUnderstanding;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalyzeOptions;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.EntitiesOptions;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Features;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.KeywordsOptions;
+
 import java.util.List;
 import java.util.ArrayList;
 /*
@@ -15,6 +21,31 @@ public class Tweet {
 
     private List<String> myMentions; //this tweets mentions
     private List<String> myHashtags; //this tweets hashtags
+
+    private static NaturalLanguageUnderstanding service; //IBM service
+    private static final String USERNAME = "fdedbc34-cb43-4787-9308-4f323f3f9c11"; //IBM service login
+    private static final String PASSWORD = "0ISekPiKsBDX"; //IBM service password
+
+    //IBM service options (don't need to update these again)
+    private static final Features features = new Features.Builder().entities(
+        new EntitiesOptions.Builder().emotion(true).sentiment(true).build()
+    ).keywords(
+        new KeywordsOptions.Builder().emotion(true).sentiment(true).build()
+    ).build();
+
+    /*
+        Connects to IBM API
+        1 is successful, 0 if something went wrong
+     */
+    public static int connectToAPI(){
+        service = new NaturalLanguageUnderstanding(
+          NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27,
+                USERNAME,
+                PASSWORD
+        );
+        //the watson API provides no way of testing if login is valid, lets hope these are correct?
+        return 1;
+    }
     /*
         Creates a new Tweet with a certain body
         @param body - the body text of the tweet. This text does not need to be cleaned because the constructor will

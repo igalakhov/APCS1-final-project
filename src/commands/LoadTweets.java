@@ -77,7 +77,7 @@ public class LoadTweets implements  ShellCommand{
     public int handleArgs(){
         System.out.println("This command cannot be used with no arguments");
         System.out.println("Type \"help loadtweets\" for more info");
-        return 1; //something went wrong
+        return 0; //something went wrong
     }
     public int handleArgs(String[] args){
         //make sure there is a good number of parameters

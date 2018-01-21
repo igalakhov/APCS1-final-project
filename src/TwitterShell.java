@@ -1,3 +1,6 @@
+import commands.AnalyzeTweets;
+import commands.LoadTweets;
+
 import java.util.*;
 
 public class TwitterShell {
@@ -8,7 +11,7 @@ public class TwitterShell {
 	    System.out.println("Created By Ivan Galakhov, Jan. 2018");
 
 	    //attempt to connect to Twitter API
-        System.out.print("Connecting to Twitter API");
+        System.out.print("Connecting to Twitter and Watson API");
         for(int i = 0; i < 2; i++){
             System.out.print(".");
             try {
@@ -17,6 +20,9 @@ public class TwitterShell {
 
             }
         }
+        AnalyzeTweets.connectToAPI();
+        LoadTweets.connectToAPI();
+
         System.out.println(".");
         //check if something went wrong
         if(CommandHandler.establishTwitterConnection() == 0){
