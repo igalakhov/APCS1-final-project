@@ -1,5 +1,6 @@
 package twitterwrapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -18,6 +19,14 @@ public class LoadedTweets {
     private int numResults; //number of results
     private boolean isLoaded; //check if any tweets are loaded
 
+    /*
+        Private constructor because this is a singleton
+     */
+    private LoadedTweets(){
+        curLoaded = new ArrayList<>();
+        isLoaded = false;
+    }
+
     //get myself
     public static LoadedTweets getInstance(){
         return myself;
@@ -29,14 +38,25 @@ public class LoadedTweets {
         println statements in one place)
         @return - true if tweets are loaded, false otherwise
      */
-    public boolean checkLoaded(){
-        return isLoaded;
-    }
+    public boolean checkLoaded(){ return isLoaded; }
     /*
         Set the params of the current tweet search
+        Also clears the current loaded ArrayList
+        @param search - the string of the search
+        @param numResults - the number of results the search had
      */
     public void setParams(String search, int numResults){
-
+        this.search = search;
+        this.numResults = numResults;
+    }
+    /*
+        Adds tweets to the current loaded array
+        Note that setParams has to be called before
+        @param toAdd - tweet to add
+     */
+    public void addTweet(Tweet toAdd){
+        if(!isLoaded) isLoaded = true;
+        curLoaded.add(toAdd);
     }
 
 }

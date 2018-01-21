@@ -42,9 +42,6 @@ public class Tweet {
                 myMentions.add(curPart.trim());
             }
         }
-        System.out.println(this.body);
-        System.out.println(myHashtags);
-        System.out.println(myMentions);
     }
     /*
         Cleans text by parsing out urls, hashtags, and mentions

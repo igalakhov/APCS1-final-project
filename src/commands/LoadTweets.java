@@ -3,6 +3,7 @@ package commands;
 import twitter4j.*;
 import twitter4j.auth.OAuth2Token;
 import twitter4j.conf.ConfigurationBuilder;
+import twitterwrapper.LoadedTweets;
 import twitterwrapper.Tweet;
 
 import java.util.ArrayList;
@@ -112,27 +113,32 @@ public class LoadTweets implements  ShellCommand{
 
         long maxId = -1;
 
+        int numFound = 0; //number of tweets we found so far
+
         searchLoop:
         while(searchResults.size() < numTweets) {
 
             //setup query
-            Query q = new Query(search + "+exclude:retweets");
+            Query q = new Query(search + "+exclude:retweets exclude:replies"); //options because retweets + replies mess up data
             q.setCount(numTweets);
             q.resultType(Query.RECENT);
             q.setLang("en");
             q.setMaxId(maxId);
 
             try {
-                QueryResult  tempResults = conn.search(q);
+                QueryResult tempResults = conn.search(q);
                 //if we found no tweets, we're done
-                if(tempResults.getCount() == 0){
+                if(tempResults.getTweets().size() == 0){
                     break searchLoop;
                 }
                 for (Status curStatus : tempResults.getTweets()) {
                     if(maxId == -1 || curStatus.getId() < maxId){
                         maxId = curStatus.getId();
                     }
+                    //add tweet
                     searchResults.add(curStatus);
+                    //increment count
+                    numFound++;
                     //if we found all our tweets, we're done
                     if(searchResults.size() >= numTweets){
                         break searchLoop;
@@ -143,12 +149,18 @@ public class LoadTweets implements  ShellCommand{
                 return 0; //something went wrong
             }
         }
+        System.out.println("Found " + numFound + " out of " + numTweets + " requested tweets.");
+
+        if(searchResults.size() == 0){
+            return 1; //no tweets found, but everything went okay :^)
+        }
+        //add tweets to currently loaded tweets
+        LoadedTweets.getInstance().setParams(search, numFound);
         for(Status s : searchResults){
-            Tweet thing = new Tweet(s.getText());
+            LoadedTweets.getInstance().addTweet(new Tweet(s.getText()));
         }
 
-
-
+        System.out.println("Tweets successfully loaded.");
         return 1;
     }
     public String getCommandPattern(){
