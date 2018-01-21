@@ -26,6 +26,14 @@ public class LoadedTweets {
         curLoaded = new ArrayList<>();
         isLoaded = false;
     }
+    /*
+        Analyzes all tweets
+     */
+    public void analyzeTweets(){
+        for(Tweet t : curLoaded){
+            t.analyze();
+        }
+    }
 
     //get myself
     public static LoadedTweets getInstance(){

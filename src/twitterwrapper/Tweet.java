@@ -1,10 +1,7 @@
 package twitterwrapper;
 
 import com.ibm.watson.developer_cloud.natural_language_understanding.v1.NaturalLanguageUnderstanding;
-import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.AnalyzeOptions;
-import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.EntitiesOptions;
-import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.Features;
-import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.KeywordsOptions;
+import com.ibm.watson.developer_cloud.natural_language_understanding.v1.model.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -15,7 +12,13 @@ import java.util.ArrayList;
  */
 public class Tweet {
     private String body; //the text of the tweet
-    private int sentiment; //sentiment value of the tweet (from watson)
+    private double mySentiment; //sentiment value of the tweet (from watson)
+    //emotions (enum would be better here, to be honest)
+    private double mySadness;
+    private double myJoy;
+    private double myFear;
+    private double myDisgust;
+    private double myAnger;
 
     public boolean analyzed; //whether or not the tweet has been fed through watson
 
@@ -27,11 +30,36 @@ public class Tweet {
     private static final String PASSWORD = "0ISekPiKsBDX"; //IBM service password
 
     //IBM service options (don't need to update these again)
-    private static final Features features = new Features.Builder().entities(
-        new EntitiesOptions.Builder().emotion(true).sentiment(true).build()
-    ).keywords(
-        new KeywordsOptions.Builder().emotion(true).sentiment(true).build()
+    private static final Features features = new Features.Builder().emotion(
+            new EmotionOptions.Builder().build()
+    ).sentiment(
+       new SentimentOptions.Builder().build()
     ).build();
+    /*
+        These functions return values of the tweet
+        @return requested value
+     */
+    public double getSentiment(){return mySentiment;};
+    public double getJoy(){return myJoy;};
+    public double getFear(){return myFear;};
+    public double getDisgust(){return myDisgust;};
+    public double getAnger(){return myAnger;};
+    /*
+       Analyzes the tweet
+    */
+    public void analyze(){
+        AnalyzeOptions params = new AnalyzeOptions.Builder().text(body).features(features).language("en").build();
+        AnalysisResults results = service.analyze(params).execute();
+
+        EmotionScores emotions = results.getEmotion().getDocument().getEmotion();
+
+        myJoy = emotions.getJoy();
+        myFear = emotions.getFear();
+        myDisgust = emotions.getDisgust();
+        myAnger = emotions.getFear();
+
+        mySentiment = results.getSentiment().getDocument().getScore();
+    }
 
     /*
         Connects to IBM API

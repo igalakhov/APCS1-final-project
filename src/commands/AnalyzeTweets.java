@@ -1,4 +1,5 @@
 package commands;
+import twitterwrapper.LoadedTweets;
 import twitterwrapper.Tweet;
 
 public class AnalyzeTweets implements ShellCommand{
@@ -12,7 +13,13 @@ public class AnalyzeTweets implements ShellCommand{
         return Tweet.connectToAPI(); //pass it on, pass it back
     }
     public int handleArgs() {
-        return 0;
+        if(!LoadedTweets.getInstance().checkLoaded()){
+            System.out.println("No tweets loaded");
+            return 0; //something went wrong
+        }
+        System.out.println("Analyzing tweets... (this might take a while)");
+        LoadedTweets.getInstance().analyzeTweets();
+        return 1;
     }
     public int handleArgs(String[] args) {
         System.out.println("This command does not take in any arguments");
@@ -23,7 +30,7 @@ public class AnalyzeTweets implements ShellCommand{
         return "analyzetweets";
     }
     public String getInfo() {
-        return "Analyzes the current loaded tweets. Note that tweeets must be loaded before they can" +
+        return "Analyzes the current loaded tweets. Note that tweets must be loaded before they can" +
                 "be analyzed";
     }
 }
