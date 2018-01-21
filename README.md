@@ -4,6 +4,8 @@ Final Project for APCS1
 
 Code finished as of 3:00 AM 1/21/2018
 
+Big thanks to [Mansour](https://github.com/Razorflame3912) for testing this on Linux
+
 ## Setup instructions:
 
 ### Windows
