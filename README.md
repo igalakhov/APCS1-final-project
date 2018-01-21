@@ -2,7 +2,7 @@
 
 Final Project for APCS1 
 
-Code inished as of 3:00 AM 1/21/2018
+Code finished as of 3:00 AM 1/21/2018
 
 ## Setup instructions:
 To compile, set your current directory to the src folder of this project and run:
