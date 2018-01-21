@@ -43,7 +43,7 @@ public class CommandHandler {
         while(true){
             System.out.print("> ");
             String raw = input.nextLine();
-            String[] parsed = raw.split(" ");
+            String[] parsed = raw.toLowerCase().split(" ");
             String commandName = parsed[0];
             String[] commandArgs = Arrays.copyOfRange(parsed, 1, parsed.length);
             //check if the command is valid
@@ -54,7 +54,7 @@ public class CommandHandler {
                 //run the command (tertiary expressions FTW!!!)
                 int result = commandArgs.length == 0 ? cur.handleArgs() : cur.handleArgs(commandArgs);
 
-                //TODO: maybe do something with the result here?
+                //maybe do something with the result here?
 
             } else {
                 //let the user know they did something wrong

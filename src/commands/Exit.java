@@ -10,13 +10,13 @@ public class Exit implements ShellCommand {
         return 0; //because something went wrong
     }
     public int handleArgs(){
-        System.exit(1);
+        System.exit(0); //everything is okay
         return 1; //should never return this, really
     }
     public String getCommandPattern(){
         return "exit";
     }
     public String getInfo(){
-        return "Exits the shell with a return status of 1";
+        return "Exits the shell with a return status of 0";
     }
 }

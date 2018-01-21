@@ -75,17 +75,17 @@ public class LoadedTweets {
 
         Tweet lo = copy.get(0);
 
-        System.out.println("Lowest Sentiment ("+ lo.getSentiment() + "):");
+        System.out.printf("Lowest Sentiment ( %.2f ):", lo.getSentiment());
         System.out.println(lo.getRawBody());
         System.out.println("");
 
         Tweet mid = copy.get((copy.size() / 2));
-        System.out.println("Median Sentiment ("+ mid.getSentiment() + "):");
+        System.out.printf("Median Sentiment ( %.2f ):", mid.getSentiment());
         System.out.println(mid.getRawBody());
         System.out.println("");
 
         Tweet hi = copy.get(copy.size() - 1);
-        System.out.println("Highest Sentiment ("+ hi.getSentiment() + "):");
+        System.out.printf("Highest Sentiment ( %.2f ):", hi.getSentiment());
         System.out.println(hi.getRawBody());
         System.out.println("");
     }
@@ -109,13 +109,13 @@ public class LoadedTweets {
             avgAnger += t.getAnger();
         }
 
-        System.out.println("Average Sentiment: " + avgSentiment / curLoaded.size());
+        System.out.printf("Average Sentiment: %.2f", avgSentiment / curLoaded.size());
         System.out.println("");
-        System.out.println("Average Joy: " + avgJoy / curLoaded.size());
-        System.out.println("Average Sadness: " + avgSadness / curLoaded.size());
-        System.out.println("Average Fear: " + avgFear / curLoaded.size());
-        System.out.println("Average Disgust: " + avgDigust / curLoaded.size());
-        System.out.println("Average Anger: " + avgAnger / curLoaded.size());
+        System.out.printf("Average Joy: %.2f", avgJoy / curLoaded.size());
+        System.out.printf("Average Sadness: %.2f", avgSadness / curLoaded.size());
+        System.out.printf("Average Fear: %.2f", avgFear / curLoaded.size());
+        System.out.printf("Average Disgust: %.2f", avgDigust / curLoaded.size());
+        System.out.printf("Average Anger: %.2f", avgAnger / curLoaded.size());
     }
     /*
         Private constructor because this is a singleton

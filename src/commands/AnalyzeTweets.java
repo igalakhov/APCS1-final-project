@@ -30,7 +30,7 @@ public class AnalyzeTweets implements ShellCommand{
         return "analyzetweets";
     }
     public String getInfo() {
-        return "Analyzes the current loaded tweets. Note that tweets must be loaded before they can" +
+        return "Analyzes the current loaded tweets. \n Note that tweets must be loaded before they can" +
                 "be analyzed";
     }
 }

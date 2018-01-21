@@ -82,7 +82,8 @@ public class LoadTweets implements  ShellCommand{
     public int handleArgs(String[] args){
         //make sure there is a good number of parameters
         if(args.length > 2){
-            System.out.println("This command canot be used with more than 2 arguments");
+            System.out.println("This command cannot be used with more than 2 arguments");
+            System.out.println("Type \"help loadtweets\" for more info");
             return 0; //something went wrong
         }
         //figure out the parameters

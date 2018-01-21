@@ -37,6 +37,7 @@ public class TwitterShell {
         mainHandler.run();
         
         //we should never get here because mainHandler.run() exits the program
-        System.out.println("If you see this, something went terribly wrong");
+        System.exit(0);
+
     }
 }

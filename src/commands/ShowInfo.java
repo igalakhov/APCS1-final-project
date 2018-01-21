@@ -43,11 +43,11 @@ public class ShowInfo implements ShellCommand{
         return "showinfo averages/benchmarks/mentions/hashtags";
     }
     public String getInfo() {
-        return "Shows info about the current analysis. Options are as follows:" +
-                "benchmarks shows 3 tweets with lowest, median, and highest sentiment" +
-                ", respectively. Averages show the average sentiment and emotion for all" +
-                "tweets. Mentions shows all mentions (as a set) used with the collected tweets" +
-                "Hashtags shows all the hashtags (as a set) used with the collected tweets";
+        return "Shows info about the current analysis. Options are as follows: \n" +
+                "Benchmarks shows 3 tweets with lowest, median, and highest sentiment" +
+                ", respectively. \n Averages show the average sentiment and emotion for all" +
+                "tweets. \n Mentions shows all mentions (as a set) used with the collected tweets" +
+                "\n Hashtags shows all the hashtags (as a set) used with the collected tweets";
     }
 
 }
