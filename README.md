@@ -25,10 +25,14 @@ java -cp twitter4j.jar;watson.jar; TwitterShell
   into the shell. 
  
 ## Example command sequence
-'''
+```
 > loadtweets #computerscience 50
+```
+```
 > analyzetweets
+```
+```
 > showinfo benchmarks
-'''
+```
 
   
