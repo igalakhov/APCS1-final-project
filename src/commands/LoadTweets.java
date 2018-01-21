@@ -93,6 +93,10 @@ public class LoadTweets implements  ShellCommand{
         if(args.length == 2) {
             try {
                 numTweets = Integer.parseInt(args[1]);
+                if(numTweets <= 0 || numTweets > 500){
+                    System.out.println("Invalid number of tweets");
+                    System.out.println("Type \"help loadtweets\" for more info");
+                }
             } catch (NumberFormatException e) {
                 System.out.println("\"" + args[1] + "\" cannot be parsed as an integer");
                 return 0; // something went wrong

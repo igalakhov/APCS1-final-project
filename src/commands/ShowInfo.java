@@ -45,8 +45,9 @@ public class ShowInfo implements ShellCommand{
     public String getInfo() {
         return "Shows info about the current analysis. Options are as follows: \n" +
                 "Benchmarks shows 3 tweets with lowest, median, and highest sentiment" +
-                ", respectively. \n Averages show the average sentiment and emotion for all" +
-                "tweets. \n Mentions shows all mentions (as a set) used with the collected tweets" +
+                ", respectively. \n Averages show the average sentiment and emotion for all." +
+                "tweets. Sentiment is scaled from -1 to 1, emotions are scaled from 0 to 1 \n" +
+                "Mentions shows all mentions (as a set) used with the collected tweets" +
                 "\n Hashtags shows all the hashtags (as a set) used with the collected tweets";
     }
 

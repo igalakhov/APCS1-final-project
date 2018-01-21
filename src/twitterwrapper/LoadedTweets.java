@@ -75,17 +75,19 @@ public class LoadedTweets {
 
         Tweet lo = copy.get(0);
 
-        System.out.printf("Lowest Sentiment ( %.2f ):", lo.getSentiment());
+        System.out.println("Showing results for " + numResults + " tweets on search \"" + search + "\" \n");
+
+        System.out.printf("Lowest Sentiment ( %.2f ): \n", lo.getSentiment());
         System.out.println(lo.getRawBody());
         System.out.println("");
 
         Tweet mid = copy.get((copy.size() / 2));
-        System.out.printf("Median Sentiment ( %.2f ):", mid.getSentiment());
+        System.out.printf("Median Sentiment ( %.2f ): \n", mid.getSentiment());
         System.out.println(mid.getRawBody());
         System.out.println("");
 
         Tweet hi = copy.get(copy.size() - 1);
-        System.out.printf("Highest Sentiment ( %.2f ):", hi.getSentiment());
+        System.out.printf("Highest Sentiment ( %.2f ): \n", hi.getSentiment());
         System.out.println(hi.getRawBody());
         System.out.println("");
     }
@@ -108,14 +110,15 @@ public class LoadedTweets {
             avgDigust += t.getDisgust();
             avgAnger += t.getAnger();
         }
+        System.out.println("Showing results for " + numResults + " tweets on search \"" + search + "\" \n");
 
-        System.out.printf("Average Sentiment: %.2f", avgSentiment / curLoaded.size());
+        System.out.printf("Average Sentiment: %.2f \n", avgSentiment / curLoaded.size());
         System.out.println("");
-        System.out.printf("Average Joy: %.2f", avgJoy / curLoaded.size());
-        System.out.printf("Average Sadness: %.2f", avgSadness / curLoaded.size());
-        System.out.printf("Average Fear: %.2f", avgFear / curLoaded.size());
-        System.out.printf("Average Disgust: %.2f", avgDigust / curLoaded.size());
-        System.out.printf("Average Anger: %.2f", avgAnger / curLoaded.size());
+        System.out.printf("Average Joy: %.2f \n", avgJoy / curLoaded.size());
+        System.out.printf("Average Sadness: %.2f \n", avgSadness / curLoaded.size());
+        System.out.printf("Average Fear: %.2f \n", avgFear / curLoaded.size());
+        System.out.printf("Average Disgust: %.2f \n", avgDigust / curLoaded.size());
+        System.out.printf("Average Anger: %.2f \n", avgAnger / curLoaded.size());
     }
     /*
         Private constructor because this is a singleton
